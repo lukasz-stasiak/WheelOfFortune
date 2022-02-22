@@ -4,19 +4,16 @@ public class Player {
 
     String name;
 
-    public Player(String name) {
-try {
-    this.name = name;
-    if (this.name == null || this.name=="")
-        throw new Exception ("Podaleś null lub pusty text");
-}
-        catch (Exception exception) {
-            System.out.println(exception.getMessage());
+    public Player(String name)  {
+
+        if (name.isEmpty()){
+            throw new NullPointerException();
         }
+        this.name = name;
     }
 
     @Override
-    public String toString() {
+    public String toString () {
         return String.format(this.name);
     }
 }
