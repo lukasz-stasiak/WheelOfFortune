@@ -2,18 +2,18 @@ package pl.javagame;
 
 public class Player {
 
-    String name;
+    private String name;
 
     public Player(String name)  {
 
-        if (name.isEmpty()){
-            throw new NullPointerException();
+        if (name==null || name.isEmpty()){
+            throw new IllegalArgumentException();
         }
         this.name = name;
     }
 
     @Override
     public String toString () {
-        return String.format(this.name);
+        return this.name;
     }
 }
