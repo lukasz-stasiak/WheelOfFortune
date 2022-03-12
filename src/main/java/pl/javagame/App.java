@@ -7,14 +7,17 @@ public class App {
 
     public static void main(String[] args) {
 
+        final int ROUNDS = 4;
+
         ArrayList<Player> playerList = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
-        int numberOfPlayers = checkingNoOfPlayers(scanner);
+        int numberOfPlayers = checkingNumberOfPlayers(scanner);
+        scanner.nextLine();
 
         try {
             for (int i = 1; i < numberOfPlayers + 1; i++) {
                 System.out.println("Wpisz imię gracza nr: " + i);
-                Player name = new Player(scanner.next());
+                Player name = new Player(scanner.nextLine());
                 playerList.add(name);
             }
 
@@ -28,20 +31,28 @@ public class App {
         }
         scanner.close();
 
+        dividingGameToRounds(ROUNDS, numberOfPlayers, playerList);
     }
 
-    private static int checkingNoOfPlayers(Scanner scanner) {
-        //Scanner scanner = new Scanner(System.in);
-        System.out.print("Podaj ilość graczy: ");
-        int noOfPlayers = scanner.nextInt();
+    private static void dividingGameToRounds(int rounds, int numberOfPlayers, ArrayList<Player> playerList) {
+        for (int round = 1; round <= rounds; round++) {
+            System.out.println("Rozpoczęła się runda: " + round);
+            for (int x = 0; x < numberOfPlayers; x++) {
+                System.out.println("Tura gracza: " + playerList.get(x));
+            }
+        }
 
-        while (noOfPlayers < 2 || noOfPlayers > 4) {
+    }
+
+    private static int checkingNumberOfPlayers(Scanner scanner) {
+        System.out.print("Podaj ilość graczy: ");
+        int numberOfPlayers = scanner.nextInt();
+
+        while (numberOfPlayers < 2 || numberOfPlayers > 4) {
             System.out.println("Ilość graczy ma być między 2 i 4");
             System.out.print("Podaj ilość graczy: ");
-            noOfPlayers = scanner.nextInt();
+            numberOfPlayers = scanner.nextInt();
         }
-        return noOfPlayers;
-
-
+        return numberOfPlayers;
     }
 }
