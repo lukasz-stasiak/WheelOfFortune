@@ -7,15 +7,15 @@ public class App {
 
     public static void main(String[] args) {
 
-        ArrayList<Player> listaGraczy = new ArrayList<>();
+        ArrayList<Player> playerList = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
-        int iloscGraczy = sprawdzIlloscGraczy();
+        int numberOfPlayers = checkingNoOfPlayers(scanner);
 
         try {
-            for (int i = 1; i < iloscGraczy + 1; i++) {
+            for (int i = 1; i < numberOfPlayers + 1; i++) {
                 System.out.println("Wpisz imię gracza nr: " + i);
-                Player imie = new Player(scanner.nextLine());
-                listaGraczy.add(imie);
+                Player name = new Player(scanner.next());
+                playerList.add(name);
             }
 
         } catch (IllegalArgumentException e) {
@@ -23,24 +23,24 @@ public class App {
         }
 
         System.out.println("Lista graczy: ");
-        for (Player lista : listaGraczy) {
+        for (Player lista : playerList) {
             System.out.println("Gracz: " + lista);
         }
         scanner.close();
 
     }
 
-    private static int sprawdzIlloscGraczy() {
-        Scanner scanner = new Scanner(System.in);
+    private static int checkingNoOfPlayers(Scanner scanner) {
+        //Scanner scanner = new Scanner(System.in);
         System.out.print("Podaj ilość graczy: ");
-        int iloscGraczy = scanner.nextInt();
+        int noOfPlayers = scanner.nextInt();
 
-        while (iloscGraczy < 2 || iloscGraczy > 4) {
+        while (noOfPlayers < 2 || noOfPlayers > 4) {
             System.out.println("Ilość graczy ma być między 2 i 4");
             System.out.print("Podaj ilość graczy: ");
-            iloscGraczy = scanner.nextInt();
+            noOfPlayers = scanner.nextInt();
         }
-        return iloscGraczy;
+        return noOfPlayers;
 
 
     }
