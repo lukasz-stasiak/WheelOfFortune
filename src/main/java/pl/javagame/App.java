@@ -35,8 +35,11 @@ public class App {
     }
 
     private static void dividingGameToRounds(int rounds, int numberOfPlayers, ArrayList<Player> playerList) {
+        PasswordManager passwordManager = new PasswordManager();
+
         for (int round = 1; round <= rounds; round++) {
             System.out.println("Rozpoczęła się runda: " + round);
+            System.out.println(passwordManager.getRandomPassword());
             for (int x = 0; x < numberOfPlayers; x++) {
                 System.out.println("Tura gracza: " + playerList.get(x));
             }
