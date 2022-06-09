@@ -6,61 +6,49 @@ import java.util.*;
 public class PasswordManager {
 
 
-    private HashMap<String, Boolean> passwords = new HashMap<>();
+    private ArrayList<String> passwords = new ArrayList<>();
+    private ArrayList<String> passwordsPicked = new ArrayList<>();
     // private ArrayList<String> copyPasswords = new ArrayList<>();
 
     public PasswordManager() {
-        passwords.put("Apetyt rośnie w miarę jedzenia", false);
-        passwords.put("Co dwie głowy to nie jedna", false);
-        passwords.put("Cwiczenie czyni mistrza", true);
-        passwords.put("Darowanemu koniowi w zęby się nie zagląda", false);
+        passwords.add("Apetyt rośnie w miarę jedzenia");
+        passwords.add("Co dwie głowy to nie jedna");
+        passwords.add("Cwiczenie czyni mistrza");
+        // passwords.add("Darowanemu koniowi w zęby się nie zagląda");
         //    passwords.add("Diabeł tkwi w szczegółach");
         //    passwords.add("Elektryka prąd nie tyka");
-
-        //    getRandomPassword();
+        //passwords_picked.add("Apetyt rośnie w miarę jedzenia");
+        //passwords_picked.add("Co dwie głowy to nie jedna");
     }
 
 
     public String getRandomPassword() {
-
-        String Password = null;
-        String getKey;
-        Boolean getValue;
-
-        Integer max = passwords.keySet().toArray().length;// result=6
-        //  int random = new Random().nextInt(max);
-
-        //  System.out.println(Password);
-
-        Object randomPassword = passwords.keySet().toArray()[new Random().nextInt(max)];
-
-      //  randomPassword = checkigRandomPassword(randomPassword);
-
-        for (Map.Entry<String, Boolean> map : passwords.entrySet()) {
-
-            getKey = map.getKey();
-            if (getKey.equals(randomPassword) && map.getValue() == true) {
-                randomPassword = passwords.keySet().toArray()[new Random().nextInt(max)];
-            } else if (getKey.equals(randomPassword) && map.getValue() == false) {
-                Password = getKey;
-                map.setValue(true);
+        String randomPassword;
+        do {
+            int max = passwords.size();// result=6
+            if (max == 0) {
+                throw new IllegalStateException("Brak unikalnego hasła");
             }
-        }
+            int random = (int) (Math.random() * max);
+            randomPassword = passwords.get(random);
+        } while (checkifPasswordIsUnique(randomPassword) == true);
 
-        return Password;
+        passwordsPicked.add(randomPassword);
+        passwords.remove(randomPassword);
+
+        return randomPassword;
+
     }
 
-    public Object checkigRandomPassword(Object randomPassword2) {
-        for (Map.Entry<String, Boolean> map : passwords.entrySet()) {
-            Integer max = passwords.keySet().toArray().length;
-            String getKey;
-            getKey = map.getKey();
-            if (getKey.equals(randomPassword2) && map.getValue() == true) {
-                randomPassword2 = passwords.keySet().toArray()[new Random().nextInt(max)];
-                checkigRandomPassword(randomPassword2);
+    private boolean checkifPasswordIsUnique(String randomPassword) {
+
+        boolean check = false;
+        for (int i = 0; i < passwordsPicked.size(); i++) {
+            if (passwordsPicked.get(i).equals(randomPassword)) {
+                check = true;
             }
         }
-        return randomPassword2;
+        return check;
     }
 
 
