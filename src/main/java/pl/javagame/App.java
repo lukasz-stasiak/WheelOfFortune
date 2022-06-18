@@ -29,19 +29,41 @@ public class App {
         for (Player lista : playerList) {
             System.out.println("Gracz: " + lista);
         }
-        scanner.close();
-
         dividingGameToRounds(ROUNDS, numberOfPlayers, playerList);
+        scanner.close();
     }
 
     private static void dividingGameToRounds(int rounds, int numberOfPlayers, ArrayList<Player> playerList) {
         PasswordManager passwordManager = new PasswordManager();
+        Scanner scanner;
+        String letter, randomPassword;
 
         for (int round = 1; round <= rounds; round++) {
+            randomPassword = passwordManager.getRandomPassword();
             System.out.println("Rozpoczęła się runda: " + round);
-            System.out.println(passwordManager.getRandomPassword());
+            System.out.println("hasło do odgadnięcia: " + randomPassword);
             for (int x = 0; x < numberOfPlayers; x++) {
                 System.out.println("Tura gracza: " + playerList.get(x));
+                System.out.println("Zgadnij literę lub hasło");
+                scanner = new Scanner(System.in);
+                letter = scanner.nextLine();
+                if (letter.length() > 1) {
+                    System.out.println("Zgaduję hasło");
+
+                    if (randomPassword.equalsIgnoreCase(letter)) {
+                        System.out.println("Hasło odgadnięte");
+                    } else {
+                        System.out.println("Niepoprawne hasło");
+                    }
+                } else {
+                    System.out.println("Zgaduję literę");
+                    if (randomPassword.contains(letter)) {
+                        System.out.println("Zgadnięta litera");
+                    } else {
+                        System.out.println("Taka litera nie występuje w haśle");
+                    }
+                }
+
             }
         }
 

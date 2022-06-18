@@ -8,18 +8,15 @@ public class PasswordManager {
 
     private ArrayList<String> passwords = new ArrayList<>();
     private ArrayList<String> passwordsPicked = new ArrayList<>();
-    // private ArrayList<String> copyPasswords = new ArrayList<>();
 
     public PasswordManager() {
         passwords.add("Apetyt rośnie w miarę jedzenia");
         passwords.add("Co dwie głowy to nie jedna");
         passwords.add("Cwiczenie czyni mistrza");
-        // passwords.add("Darowanemu koniowi w zęby się nie zagląda");
-        //    passwords.add("Diabeł tkwi w szczegółach");
-        //    passwords.add("Elektryka prąd nie tyka");
-        //passwords_picked.add("Apetyt rośnie w miarę jedzenia");
-        //passwords_picked.add("Co dwie głowy to nie jedna");
-    }
+        passwords.add("Darowanemu koniowi w zęby się nie zagląda");
+        passwords.add("Diabeł tkwi w szczegółach");
+        passwords.add("Elektryka prąd nie tyka");
+       }
 
 
     public String getRandomPassword() {
